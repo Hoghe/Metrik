@@ -12,12 +12,13 @@ public class MainWindow extends Frame implements WindowListener{
 	private TextField _tfY_1 = new TextField("y= ",5);
 	private TextField _tfX_2 = new TextField("x= ",5);
 	private TextField _tfY_2 = new TextField("y= ",5);
+	private TextField _tfr = new TextField("Radius eingeben",15);
 	
 	public MainWindow(int _breite, int _hoehe) {
 		this._breite = _breite;
 		this._hoehe = _hoehe;
 		setSize(_breite, _hoehe);
-		setTitle("Metrik Version 1.2");
+		setTitle("Metrik Version 1.2.1");
 		
 		addWindowListener(this);
 
@@ -35,7 +36,10 @@ public class MainWindow extends Frame implements WindowListener{
 	    _tfY_2.setEditable(false);
 	    this.add(_tfY_2);
 	    
-	    d = new DrawObject(_breite, _hoehe, _tfX_1, _tfY_1, _tfX_2, _tfY_2);
+	    _tfr.setEditable(true);
+	    this.add(_tfr);
+	    
+	    d = new DrawObject(_breite, _hoehe, _tfX_1, _tfY_1, _tfX_2, _tfY_2, _tfr);
 		this.add(d);
 		
 		MainMenuBar mmb = new MainMenuBar(d);
