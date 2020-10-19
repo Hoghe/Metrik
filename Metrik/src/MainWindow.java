@@ -3,18 +3,44 @@ import java.awt.event.*;
 
 public class MainWindow extends Frame implements WindowListener{
 	
-	public MainWindow() {
-		setSize(300, 400);
-		setTitle("Metrik Version 1.0");
+	private int _breite, _hoehe;
+	private DrawObject d;
+	private FlowLayout flAnordnung = new FlowLayout();
+	private Label _kreis_1 = new Label("Kreis 1:");
+	private Label _kreis_2 = new Label("Kreis 2:");
+	private TextField _tfX_1 = new TextField("x= ",5);
+	private TextField _tfY_1 = new TextField("y= ",5);
+	private TextField _tfX_2 = new TextField("x= ",5);
+	private TextField _tfY_2 = new TextField("y= ",5);
+	
+	public MainWindow(int _breite, int _hoehe) {
+		this._breite = _breite;
+		this._hoehe = _hoehe;
+		setSize(_breite, _hoehe);
+		setTitle("Metrik Version 1.2");
 		
 		addWindowListener(this);
-//		add(new DrawObject());
+
+		this.setLayout(flAnordnung);
 		
-		DrawObject d = new DrawObject();
-		add(d);
+		this.add(_kreis_1);
+	    _tfX_1.setEditable(false);
+	    this.add(_tfX_1);
+	    _tfY_1.setEditable(false);
+	    this.add(_tfY_1);
+
+		this.add(_kreis_2);
+	    _tfX_2.setEditable(false);
+	    this.add(_tfX_2);
+	    _tfY_2.setEditable(false);
+	    this.add(_tfY_2);
+	    
+	    d = new DrawObject(_breite, _hoehe, _tfX_1, _tfY_1, _tfX_2, _tfY_2);
+		this.add(d);
 		
 		MainMenuBar mmb = new MainMenuBar(d);
 		setMenuBar(mmb);
+		
 	}
 	
 	public void openWindow() {
