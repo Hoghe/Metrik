@@ -8,7 +8,13 @@ public class MainWindow extends Frame implements WindowListener{
 		setTitle("Metrik Version 1.0");
 		
 		addWindowListener(this);
-		add(new DrawObject());
+//		add(new DrawObject());
+		
+		DrawObject d = new DrawObject();
+		add(d);
+		
+		MainMenuBar mmb = new MainMenuBar(d);
+		setMenuBar(mmb);
 	}
 	
 	public void openWindow() {
