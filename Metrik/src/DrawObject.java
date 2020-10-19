@@ -22,8 +22,8 @@ public class DrawObject extends Canvas implements MouseListener{
 		Graphics2D g2d = (Graphics2D) g;
 		switch(auswahl) {
 		case ZEICHNEN:
-			Ellipse2D kreis = new Ellipse2D.Float(_x, _y, 20F, 20F);
-			g2d.draw(kreis);
+			Rectangle2D quadrat = new Rectangle2D.Float(_x, _y, 20F, 20F);
+			g2d.draw(quadrat);
 			break;
 		case LOESCHEN:
 			g2d.clearRect(0, 0, 300, 400);
