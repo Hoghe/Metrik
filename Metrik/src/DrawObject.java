@@ -34,14 +34,25 @@ public class DrawObject extends Canvas implements MouseListener{
 	public void paint(Graphics g, zeichenmodus auswahl ) {
 		if(_x == 0 && _y == 0) return;
 		Graphics2D g2d = (Graphics2D) g;
+		Ellipse2D kreis = new Ellipse2D.Double(_x, _y, _radius*2, _radius*2);
 		switch(auswahl) {
 		case ZEICHNEN:
-			Ellipse2D kreis = new Ellipse2D.Double(_x, _y, _radius*2, _radius*2);
 			g2d.draw(kreis);
+			break;
+		case MITLINIE:
+			g2d.draw(kreis);
+			Shape linie = new Line2D.Double(Double.parseDouble(_x1.getText()) ,
+					Double.parseDouble(_y1.getText()),
+					Double.parseDouble(_x2.getText()),
+					Double.parseDouble(_y2.getText()));
+			g2d.draw(linie);
+			g2d.draw(kreis);
+			
 			Font hypo = new Font("Arial", Font.BOLD, 12);
 			g2d.setFont(hypo);
 			g2d.drawString( _lineLength, _breite/100*25, 15 );
-			_lineLength = "";			
+			_lineLength = "";
+			
 			break;
 		case LOESCHEN:
 			g2d.clearRect(0, 0, _breite, _hoehe);
@@ -71,11 +82,11 @@ public class DrawObject extends Canvas implements MouseListener{
 		_y = e.getY();
 
 		if(_count == 0 && _radius>0.0) {
-			paint(getGraphics(), zeichenmodus.ZEICHNEN);
 			_x1.setText(""+(_x+_radius));
 			_y1.setText(""+(_y+_radius));
 			_posX1 = _x + _radius;
 			_posY1 = _y + _radius;
+			paint(getGraphics(), zeichenmodus.ZEICHNEN);
 			_count++;
 		} else if (_count==1 && _radius>0.0) {
 			_x2.setText(""+(_x+_radius));
@@ -88,7 +99,7 @@ public class DrawObject extends Canvas implements MouseListener{
 			c = Math.round( 100.0 * Math.sqrt( a*a + b*b ) ) / 100.0;
 			_lineLength = _lineLength + "Länge der Verbindungslinie: " + c;
 			
-			paint(getGraphics(), zeichenmodus.ZEICHNEN);
+			paint(getGraphics(), zeichenmodus.MITLINIE);
 			_count++;		
 		} else {
 			paint(getGraphics(), zeichenmodus.LOESCHEN);
@@ -119,7 +130,7 @@ public class DrawObject extends Canvas implements MouseListener{
 	
 	private enum zeichenmodus	{
 		
-		 ZEICHNEN, LOESCHEN
+		 ZEICHNEN, MITLINIE, LOESCHEN
 		 }
 
 }
